@@ -32,6 +32,13 @@ resource "google_compute_instance" "vm_instance" {
 
     tags         = ["web", "dev"]
 
+    // add provisioners local exec to run commands on the instance
+    provisioner "local-exec" {
+          command = "echo ${google_compute_instance.vm_instance.name}: ${google_compute_instance.vm_instance.network_interface[0].access_config[0].nat_ip} >> ip_address.txt"
+    }
+    // local exec used to run locally on the machine where terraform is installed e.g on the machine where the terraform code is run
+
+
     // the disk image to use for the instance
   boot_disk {
     initialize_params {
@@ -67,7 +74,7 @@ resource "google_storage_bucket" "example_bucket" {
 resource "google_compute_instance" "another_instance" {
   # Tells Terraform that this VM instance must be created only after the
   # storage bucket has been created.
-  depends_on = [google_storage_bucket.example_bucket]
+  depends_on = [google_storage_bucket.example_bucket] // this is used to create the instance only after the bucket has been created
   name         = "terraform-instance-2"
   machine_type = "f1-micro"
   boot_disk {
@@ -76,7 +83,7 @@ resource "google_compute_instance" "another_instance" {
     }
   }
   network_interface {
-    network = google_compute_network.vpc_network.self_link
+    network = google_compute_network.vpc_network.self_link 
     access_config {
     }
   }

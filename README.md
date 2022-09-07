@@ -23,7 +23,7 @@ to validate the changes to your infrastructure
 to format the changes to your infrastructure
 
 # terraform taint
-to taint the changes to your infrastructure
+to taint the changes to your infrastructure "to force a resource to be destroyed and recreated on the next apply"
 
 # terraform state
 to state the changes to your infrastructure
