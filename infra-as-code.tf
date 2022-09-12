@@ -70,6 +70,7 @@ resource "google_storage_bucket" "example_bucket" {
     not_found_page   = "404.html"
   }
 }
+
 # Create a new instance that uses the bucket
 resource "google_compute_instance" "another_instance" {
   # Tells Terraform that this VM instance must be created only after the
