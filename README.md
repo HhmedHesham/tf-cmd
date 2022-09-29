@@ -50,3 +50,4 @@ e.g: output "project_id" {
   description = "VPC project id"
 }
 
+kubectl --kubeconfig user-cluster01-kubeconfig get ns => this command 
